@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ubuntu/isrobot_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/ubuntu/isrobot_ws/src/control_pkg/include/**",
+        "/home/ubuntu/isrobot_ws/src/custom_msgs/include/**",
+        "/home/ubuntu/isrobot_ws/src/gazebo_ros_pkgs/gazebo_plugins/include/**",
+        "/home/ubuntu/isrobot_ws/src/gazebo_ros_pkgs/gazebo_ros/include/**",
+        "/home/ubuntu/isrobot_ws/src/gazebo_ros_pkgs/gazebo_ros_control/include/**",
+        "/home/ubuntu/isrobot_ws/src/hardware_interface_pkg/include/**",
+        "/home/ubuntu/isrobot_ws/src/navigation_pkg/include/**",
+        "/home/ubuntu/isrobot_ws/src/perception_pkg/include/**",
+        "/home/ubuntu/isrobot_ws/src/user_interface_pkg/include/**",
+        "/home/ubuntu/isrobot_ws/src/utilities_pkg/include/**",
+        "/home/ubuntu/isrobot_ws/src/voice_assistant_pkg/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

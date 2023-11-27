@@ -1,0 +1,373 @@
+  <transmission name="wheel_1_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+      
+    <joint name="wheel_joint_1">
+      <hardwareInterface>
+        hardware_interface/VelocityJointInterface
+      </hardwareInterface>      
+    </joint> 
+    
+    <actuator name="wheel_1_actuator">        
+      <mechanicalReduction>1</mechanicalReduction>    
+      <hardwareInterface>
+        VelocityJointInterface
+      </hardwareInterface>   
+    </actuator> 
+  </transmission>
+  
+  <transmission name="wheel_2_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+      
+    <joint name="wheel_joint_2">
+      <hardwareInterface>
+        hardware_interface/VelocityJointInterface
+      </hardwareInterface>      
+    </joint> 
+    
+    <actuator name="wheel_2_actuator">        
+      <mechanicalReduction>1</mechanicalReduction>    
+      <hardwareInterface>
+        VelocityJointInterface
+      </hardwareInterface>   
+    </actuator> 
+  </transmission>
+
+  <transmission name="wheel_3_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+      
+    <joint name="wheel_joint_3">
+      <hardwareInterface>
+        hardware_interface/VelocityJointInterface
+      </hardwareInterface>      
+    </joint> 
+    
+    <actuator name="wheel_3_actuator">        
+      <mechanicalReduction>1</mechanicalReduction>    
+      <hardwareInterface>
+        VelocityJointInterface
+      </hardwareInterface>   
+    </actuator> 
+  </transmission>
+
+  <transmission name="wheel_4_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+      
+    <joint name="wheel_joint_4">
+      <hardwareInterface>
+        hardware_interface/VelocityJointInterface
+      </hardwareInterface>      
+    </joint> 
+    
+    <actuator name="wheel_4_actuator">        
+      <mechanicalReduction>1</mechanicalReduction>    
+      <hardwareInterface>
+        VelocityJointInterface
+      </hardwareInterface>   
+    </actuator> 
+  </transmission> 
+
+  <gazebo>
+  <plugin name='skid_steer_drive' filename='libgazebo_ros_skid_steer_drive.so'>
+        <ros>
+          <namespace>/isrobot</namespace>
+          <remapping>cmd_vel:=cmd_vel</remapping>
+          <remapping>odom:=odom</remapping>
+        </ros>
+
+        <num_wheel_pairs>2</num_wheel_pairs>
+        <left_joint>wheel_joint_2</left_joint>
+        <right_joint>wheel_joint_1</right_joint>
+        <left_joint>wheel_joint_3</left_joint>
+        <right_joint>wheel_joint_4</right_joint>
+        <wheel_separation>0.5</wheel_separation>
+        <wheel_separation>0.5</wheel_separation>
+        <wheel_diameter>0.14</wheel_diameter>
+        <wheel_diameter>0.14</wheel_diameter>
+        <max_wheel_torque>20</max_wheel_torque>
+        <max_wheel_acceleration>1.0</max_wheel_acceleration>
+        <publish_odom>true</publish_odom>
+        <publish_odom_tf>true</publish_odom_tf>
+        <publish_wheel_tf>true</publish_wheel_tf>
+        <odometry_frame>odom_frame_test</odometry_frame>
+        <robot_base_frame>base_link</robot_base_frame>
+
+      </plugin>
+  </gazebo>
+   
+    <!-- Encoder Plugin for Wheel 1 -->
+<gazebo reference="wheel_link_1">
+  <plugin name="encoder_plugin_wheel_1" filename="libgazebo_ros_diff_drive.so">
+    <robotNamespace>/</robotNamespace>
+    <jointName>wheel_joint_1</jointName>
+    <frameName>wheel_link_1</frameName>
+    <bodyName>base_link</bodyName>
+    <updateRate>50.0</updateRate>
+    <topicName>isrobot/encoder/wheel_1</topicName>
+  </plugin>
+</gazebo>
+
+<!-- Encoder Plugin for Wheel 2 -->
+<gazebo reference="wheel_link_2">
+  <plugin name="encoder_plugin_wheel_2" filename="libgazebo_ros_diff_drive.so">
+    <robotNamespace>/</robotNamespace>
+    <jointName>wheel_joint_2</jointName>
+    <frameName>wheel_link_2</frameName>
+    <bodyName>base_link</bodyName>
+    <updateRate>50.0</updateRate>
+    <topicName>isrobot/encoder/wheel_2</topicName>
+  </plugin>
+</gazebo>
+
+<!-- Encoder Plugin for Wheel 3 -->
+<gazebo reference="wheel_link_3">
+  <plugin name="encoder_plugin_wheel_3" filename="libgazebo_ros_diff_drive.so ">
+    <robotNamespace>/</robotNamespace>
+    <jointName>wheel_joint_3</jointName>
+    <frameName>wheel_link_3</frameName>
+    <bodyName>base_link</bodyName>
+    <updateRate>50.0</updateRate>
+    <topicName>isrobot/encoder/wheel_3</topicName>
+  </plugin>
+</gazebo>
+
+<!-- Encoder Plugin for Wheel 4 -->
+<gazebo reference="wheel_link_4">
+  <plugin name="encoder_plugin_wheel_4" filename="libgazebo_ros_diff_drive.so">
+    <robotNamespace>/</robotNamespace>
+    <jointName>wheel_joint_4</jointName>
+    <frameName>wheel_link_4</frameName>
+    <bodyName>base_link</bodyName>
+    <updateRate>50.0</updateRate>
+    <topicName>isrobot/encoder/wheel_4</topicName>
+  </plugin>
+</gazebo>    
+</robot>
+ 
+ <!-- Camera Sensor -->
+  <gazebo reference="head_link">
+    <sensor type="camera" name="head_camera">
+      <camera name="head_camera">
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>100</far>
+        </clip>
+      </camera>
+      <always_on>true</always_on>
+      <update_rate>30.0</update_rate>
+      <visualize>true</visualize>
+    </sensor>
+  </gazebo>
+
+  <!-- Lidar Sensor -->
+  <gazebo reference="lidar_link">
+    <sensor type="ray" name="lidar_sensor">
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-2.35619</min_angle>
+            <max_angle>2.35619</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>1</samples>
+            <resolution>1</resolution>
+            <min_angle>0</min_angle>
+            <max_angle>0</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.1</min>
+          <max>30.0</max>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <always_on>true</always_on>
+      <update_rate>10.0</update_rate>
+      <visualize>true</visualize>
+      <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/sensor_msgs/LaserScan</topicName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- Wheel Encoders (Assuming joint_state_controller publishes joint states) -->
+  <gazebo reference="base_link">
+    <sensor type="joint_state" name="wheel_encoder">
+      <always_on>true</always_on>
+      <update_rate>50.0</update_rate>
+      <visualize>false</visualize>
+    </sensor>
+  </gazebo>
+
+  <!-- IMU Sensor -->
+  <gazebo reference="base_link">
+    <sensor type="imu" name="imu_sensor">
+      <imu>
+        <gravity>true</gravity>
+        <acceleration>true</acceleration>
+        <rate>true</rate>
+        <pose>true</pose>
+        <velocity>false</velocity>
+        <magnetic_field>false</magnetic_field>
+      </imu>
+      <always_on>true</always_on>
+      <update_rate>100.0</update_rate>
+      <visualize>false</visualize>
+    </sensor>
+  </gazebo>
+
+  <!-- Microphone Sensor -->
+  <gazebo reference="head_link">
+    <sensor type="audio" name="microphone_sensor">
+      <!-- Specify microphone sensor parameters as needed -->
+      <microphone>
+        <!-- Parameters go here -->
+      </microphone>
+      <always_on>true</always_on>
+      <update_rate>44100.0</update_rate>
+      <visualize>false</visualize>
+    </sensor>
+  </gazebo>
+
+  <!-- Speaker Actuator -->
+  <gazebo reference="head_link">
+    <sensor type="audio" name="speaker_actuator">
+      <!-- Specify speaker actuator parameters as needed -->
+      <speaker>
+        <!-- Parameters go here -->
+      </speaker>
+      <always_on>true</always_on>
+      <update_rate>44100.0</update_rate>
+      <visualize>false</visualize>
+    </sensor>
+  </gazebo>
+</robot>
+
+<!-- ... Existing robot description ... -->
+
+<!-- Camera Sensor -->
+<gazebo reference="head_link">
+  <sensor type="camera" name="head_camera">
+    <camera name="head_camera">
+      <!-- Camera parameters -->
+      <horizontal_fov>1.047</horizontal_fov>
+      <image>
+        <width>640</width>
+        <height>480</height>
+        <format>R8G8B8</format>
+      </image>
+      <clip>
+        <near>0.01</near>
+        <far>100</far>
+      </clip>
+    </camera>
+    <!-- Sensor settings -->
+    <always_on>true</always_on>
+    <update_rate>30.0</update_rate>
+    <visualize>true</visualize>
+    <!-- Plugin for camera -->
+    <plugin name="gazebo_ros_camera_controller" filename="libgazebo_ros_camera.so">
+      <!-- Topic to publish camera images -->
+      <topicName>/head_camera/image_raw</topicName>
+    </plugin>
+  </sensor>
+</gazebo>
+
+<!-- Second Camera Sensor -->
+<gazebo reference="second_camera_link">
+  <sensor type="camera" name="second_camera">
+    <!-- Define parameters for the second camera similarly -->
+  </sensor>
+</gazebo>
+
+<!-- Lidar Sensor -->
+<gazebo reference="lidar_link">
+  <sensor type="ray" name="lidar_sensor">
+    <ray>
+      <!-- Lidar parameters -->
+      <scan>
+        <horizontal>
+          <samples>720</samples>
+          <resolution>1</resolution>
+          <min_angle>-2.35619</min_angle>
+          <max_angle>2.35619</max_angle>
+        </horizontal>
+        <vertical>
+          <samples>1</samples>
+          <resolution>1</resolution>
+          <min_angle>0</min_angle>
+          <max_angle>0</max_angle>
+        </vertical>
+      </scan>
+      <range>
+        <min>0.1</min>
+        <max>30.0</max>
+      </range>
+      <noise>
+        <type>gaussian</type>
+        <mean>0</mean>
+        <stddev>0.01</stddev>
+      </noise>
+    </ray>
+    <!-- Sensor settings -->
+    <always_on>true</always_on>
+    <update_rate>10.0</update_rate>
+    <visualize>true</visualize>
+    <!-- Plugin for lidar -->
+    <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_laser.so">
+      <!-- Topic to publish lidar scans -->
+      <topicName>/lidar_sensor/scan</topicName>
+    </plugin>
+  </sensor>
+</gazebo>
+
+<!-- Wheel Encoders -->
+<!-- Create similar blocks for each wheel encoder -->
+<!-- Assuming joint_state_controller publishes joint states -->
+<gazebo reference="base_link">
+  <sensor type="joint_state" name="wheel_encoder">
+    <!-- Sensor settings -->
+    <always_on>true</always_on>
+    <update_rate>50.0</update_rate>
+    <visualize>false</visualize>
+    <!-- Plugin for wheel encoder -->
+    <plugin name="gazebo_ros_joint_state_controller" filename="libgazebo_ros_joint_state.so">
+      <!-- Topic to publish joint states -->
+      <topicName>/joint_states</topicName>
+    </plugin>
+  </sensor>
+</gazebo>
+
+<!-- IMU Sensor -->
+<gazebo reference="base_link">
+  <sensor type="imu" name="imu_sensor">
+    <imu>
+      <!-- IMU parameters -->
+      <!-- ... -->
+    </imu>
+    <!-- Sensor settings -->
+    <always_on>true</always_on>
+    <update_rate>100.0</update_rate>
+    <visualize>false</visualize>
+    <!-- Plugin for IMU -->
+    <plugin name="gazebo_ros_imu_controller" filename="libgazebo_ros_imu.so">
+      <!-- Topic to publish IMU data -->
+      <topicName>/imu_sensor/data</topicName>
+    </plugin>
+  </sensor>
+</gazebo>
+
+<!-- ... Additional sensors ... -->
+
+</robot>

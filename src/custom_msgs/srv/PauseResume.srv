@@ -1,0 +1,3 @@
+#PauseResume.srv
+bool pause
+bool success
