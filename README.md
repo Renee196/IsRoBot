@@ -77,6 +77,59 @@ If you encounter issues or have questions, feel free to contact us.
 
 Make sure to follow best practices for code development and ROS package structuring.
 
+Here's a brief description for each package in your isrobot project:
+
+control_pkg:
+Contents: Contains scripts for controlling the robot, including gesture control (gesture_control.py), remote control (remote_control.py), and voice control (voice_control.py).
+Purpose: Enables various methods of controlling the robot, allowing for flexibility in user interaction.
+
+custom_msgs:
+Contents: Defines custom ROS messages (e.g., MoveMotor.msg, PathUpdate.msg, QRCodeInfo.msg, QRDetectionInfo.msg, QRDistanceInfo.msg) used for communication between different parts of the robot.
+Purpose: Facilitates communication by defining message structures tailored to the specific needs of the robot.
+
+gazebo_ros_pkgs:
+Contents: Contains standalone Gazebo ROS packages with plugins and tools for simulating sensors, cameras, and other robot components in the Gazebo simulation environment.
+Purpose: Essential for Gazebo simulation, allowing developers to test and validate the robot's behavior in a controlled environment.
+
+hardware_interface_pkg:
+Contents: Includes configuration files, scripts, and URDF files related to the hardware interface of the robot. Meshes (frustum.dae and midbody.dae) and URDF file (isrobot.urdf) define the physical structure of the robot.
+Purpose: Defines the hardware aspects of the robot, necessary for accurate simulation and interaction with the physical world
+
+joint_state_publisher:
+Contents: Provides a node (joint_state_publisher) and configuration files for publishing joint states of the robot. The github repo has been modified in the isrobot workspace. Kindly check it out before proceeding to use the joint_state_publisher for gazebo simulation.
+Purpose: Necessary for visualizing the robot's state accurately in ROS tools like RViz and sim tools like Gazebo.
+
+navigation_pkg:
+Contents: Contains configuration files and scripts related to robot navigation, including path planning and obstacle avoidance. The obstacle avoidance code has not been updated, since it is contained in the path planning node. Feel free to modify the nodes of any package according to yourself.
+Purpose: Enables the robot to navigate autonomously in its environment, avoiding obstacles and following predefined paths.
+
+perception_pkg:
+Contents: Includes scripts for perception tasks such as cliff detection (cliff_detection.py), depth estimation (depth_estimation.py), sensor fusion (ekf_sensor_fusion.py), object detection (object_detection.py), obstacle avoidance (obstacle_avoidance.py), path planning (path_planning.py), and QR code scanning (scan_qr.py).
+Purpose: Enhances the robot's perception capabilities, crucial for navigation, interaction, and understanding its surroundings.
+
+robot_localization:
+Contents: A standalone package for sensor fusion and state estimation, providing tools for integrating data from multiple sensors.
+Purpose: Improves the accuracy of robot localization by fusing information from sensors such as encoders and IMU.
+
+teleop_twist_keyboard:
+Contents: Includes a ROS node (teleop_twist_keyboard.py) for teleoperating the robot using keyboard commands.
+Purpose: Facilitates manual control of the robot during testing and development.
+
+user_interface_pkg:
+Contents: Placeholder for user interface-related files. Has not been updated yet, but for deployment of the robot, this package will be important
+Purpose: Reserved for potential future development of a user interface for interacting with the robot.
+
+utilities_pkg:
+Contents: Placeholder for utility scripts and configuration files.
+Purpose: Reserved for potential future utility scripts or configurations.
+
+voice_assistant_pkg:
+Contents: Contains a ROS node (voice_assistant.py) for enabling voice interaction with the robot.
+Purpose: Provides a natural and intuitive way for users to communicate with the robot using voice commands.
+
+SLAM has to be implemented using the gmapping standalone package.
+
 Have fun exploring and extending the capabilities of IsRoBot!
 
+![IsRoBot ROS Architecture](https://github.com/Renee196/IsRoBot/assets/76276943/45ae278a-2874-47da-9622-8cc6b9577670)
 
