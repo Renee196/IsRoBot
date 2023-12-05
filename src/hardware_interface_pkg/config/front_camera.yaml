@@ -1,0 +1,36 @@
+# Front Camera ROS Driver Configuration
+
+# ROS Node Name
+node_name: front_cam
+
+# Camera Configuration (change accordingly)
+video_device: /dev/video0
+image_width: 640
+image_height: 480
+pixel_format: yuyv
+
+# ROS Topics (change accordingly)
+image_topic: /front_camera/image_raw
+camera_info_topic: camera_info
+frame_id: front_camera_frame
+
+# Camera Calibration Parameters (modify based on your camera)
+camera_name: front_camera
+camera_info_url:
+calibration_file:
+
+# ROS Parameters (change accordingly)
+framerate: 30
+brightness: 50
+contrast: 50
+saturation: 50
+sharpness: 0
+auto_focus: true
+exposure: -1
+
+# Debugging
+debug: false
+info: true
+warn: true
+error: true
+

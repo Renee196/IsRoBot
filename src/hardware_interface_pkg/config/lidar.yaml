@@ -1,0 +1,41 @@
+# RP Lidar ROS Driver Configuration
+
+# ROS Node Name
+node_name: lidar
+
+# Serial Port Configuration (change accordingly)
+serial_port: /dev/ttyUSB0
+serial_baudrate: 115200
+
+# Frame ID (change accordingly)
+frame_id: lidar_frame
+
+# Laser Configuration (change accordingly)
+inverted: false
+angle_compensate: true
+
+# Motor Configuration (change accordingly)
+motor_pwm: -1  # Use -1 for default PWM
+
+# Scan Configuration (change accordingly)
+scan_mode: Sensitivity
+
+# Timeouts (change accordingly)
+time_offset: 0.0
+scan_duration: 2.0
+data_sampling_duration: 2000
+
+# ROS Topics
+scan_topic: /lidar/scan
+scan_unite_to_one: true
+
+# ROS Parameters
+frame_id: lidar_frame
+publish_frequency: 10.0
+
+# Debugging
+debug: false
+info: true
+warn: true
+error: true
+

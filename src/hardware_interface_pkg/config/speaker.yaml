@@ -1,0 +1,14 @@
+# Speaker ROS Configuration
+
+# ROS Node Name
+node_name: speaker
+
+# ROS Parameters (change accordingly)
+sound_play_topic:/audio/speaker
+
+# Debugging
+debug: false
+info: true
+warn: true
+error: true
+

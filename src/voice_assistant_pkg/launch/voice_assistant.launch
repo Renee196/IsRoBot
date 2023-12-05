@@ -1,0 +1,4 @@
+<launch>
+<node pkg="voice_assistant_pkg" type="voice_assistant.py" name="voice_assistant_node" output="screen"/>
+</launch>
+

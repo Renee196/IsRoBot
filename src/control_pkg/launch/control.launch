@@ -1,0 +1,7 @@
+<launch>
+<node pkg="control_pkg" type="gesture_control.py" name="gesture_control_node" output="screen"/>
+<node pkg="control_pkg" type="remote_control.py" name="remote_control_node" output="screen"/>
+<node pkg="control_pkg" type="robot_control_node.py" name="robot_control_node" output="screen"/>
+<node pkg="control_pkg" type="voice_control.py" name="voice_control_node" output="screen"/>
+</launch>
+

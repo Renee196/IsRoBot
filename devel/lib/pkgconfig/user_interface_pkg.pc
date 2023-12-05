@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/isrobot_ws/devel
+
+Name: user_interface_pkg
+Description: Description of user_interface_pkg
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

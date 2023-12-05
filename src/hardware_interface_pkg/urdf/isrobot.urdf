@@ -1,0 +1,674 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="isrobot" is_static="True">
+  
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.13" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.6 0.5 0.15"/>
+      </geometry>
+      <material name="base_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.13" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.6 0.5 0.15"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="3" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.068125" ixy="0" ixz="0" iyy="0.002025" iyz="0" izz="0.09" />
+    </inertial>
+  </link>
+
+  <joint name="base_frustum" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="frustum_link"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.5" friction="0.1"/>
+  </joint>
+
+  <!-- Frustum Link -->
+  <link name="frustum_link">
+    <!-- Visual Properties for the frustum (customize as needed) -->
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.505"/> <!-- Adjust the position -->
+      <geometry>
+        <mesh filename="package://hardware_interface_pkg/meshes/frustum.dae"/>
+      </geometry>
+      <material name="frustum_material">
+        <color rgba="0 1 0 1"/> <!-- black color for the frustum -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the frustum (customize as needed) -->
+    <collision>
+      <geometry>
+        <mesh filename="package://hardware_interface_pkg/meshes/frustum.dae"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="2.5" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.02382" ixy="0" ixz="0" iyy="0.00664" iyz="0" izz="0.00664"/>
+    </inertial>
+  </link>
+
+  <link name="camera_frustum_link">
+    <visual>
+    <origin xyz="0.08 0 0.805" rpy="0 1.5 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.02"/>
+      </geometry>
+    </visual>
+    <!-- Collision Properties for the wheel (customize as needed) -->
+    <collision>
+      <geometry>
+        <cylinder length="0.02" radius="0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.015" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+  </link>
+
+  <joint name="frustum_cylinder" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="frustum_link"/>
+    <child link="cylindrical_link"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.5" friction="0.1"/>
+  </joint>
+
+  <joint name="frustum_camera" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="frustum_link"/>
+    <child link="camera_frustum_link"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.5" friction="0.1"/>
+  </joint>
+
+  <!-- Cylindrical Link -->
+  <link name="cylindrical_link">
+    <!-- Visual Properties for the cylindrical shape (customize as needed) -->
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.8353"/> <!-- Adjust the position -->
+      <geometry>
+        <cylinder length="0.0606" radius="0.075"/> <!-- Adjust dimensions for the cylinder -->
+      </geometry>
+      <material name="cylindrical_material">
+        <color rgba="0 0 0 1"/> <!-- Red color for the cylindrical shape -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the cylindrical shape (customize as needed) -->
+    <collision>
+      <geometry>
+        <cylinder length="0.0606" radius="0.15"/> <!-- Adjust dimensions for collision -->
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.25" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.000137" ixy="0" ixz="0" iyy="0.000137" iyz="0" izz="0.000137" />
+    </inertial>
+  </link>
+
+  <joint name="cylindrical_midbody" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="cylindrical_link"/>
+    <child link="midbody_link"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- Spherical Link -->
+  <link name="midbody_link">
+    <!-- Visual Properties for the spherical shape (customize as needed) -->
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.8996"/> <!-- Adjust the position -->
+      <geometry>
+        <mesh filename="package://hardware_interface_pkg/meshes/midbody.dae"/>
+      </geometry>
+      <material name="spherical_material">
+        <color rgba="0 0 0 1"/> <!-- Blue color for the spherical shape -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the spherical shape (customize as needed) -->
+    <collision>
+      <geometry>
+        <mesh filename="package://hardware_interface_pkg/meshes/midbody.dae"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.25" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.0000488" ixy="0" ixz="0" iyy="0.000013" iyz="0" izz="0.000013" />
+    </inertial>
+  </link>
+
+  <joint name="midbody_cuboidal" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="midbody_link"/>
+    <child link="cuboidal_link"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- Cuboidal Link -->
+  <link name="cuboidal_link">
+    <!-- Visual Properties for the cuboidal shape (customize as needed) -->
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 1.05"/> <!-- Adjust the position -->
+      <geometry>
+        <box size="0.12 0.05 0.268"/> <!-- Adjust dimensions for the cuboid -->
+      </geometry>
+      <material name="cuboidal_material">
+        <color rgba="1 1 1 1"/> <!-- Yellow color for the cuboidal shape -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the cuboidal shape (customize as needed) -->
+    <collision>
+      <geometry>
+        <box size="0.12 0.05 0.268"/> <!-- Adjust dimensions for collision -->
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.5" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.018581" ixy="0" ixz="0" iyy="0.000258" iyz="0" izz="0.000009" />
+    </inertial>
+  </link>
+
+  <joint name="cuboidal_head" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="cuboidal_link"/>
+    <child link="head_link"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- Head Link (Add visual, collision, inertial, and joints as needed) -->
+  <link name="head_link">
+    <!-- Visual Properties for the cuboidal shape (customize as needed) -->
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 1.1666"/> <!-- Adjust the position -->
+      <geometry>
+        <box size="0.2184 0.09 0.15"/> <!-- Adjust dimensions for the cuboid -->
+      </geometry>
+      <material name="cuboidal_material">
+        <color rgba="1 1 1 1"/> <!-- Yellow color for the cuboidal shape -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the cuboidal shape (customize as needed) -->
+    <collision>
+      <geometry>
+        <box size="0.2184 0.09 0.15"/> <!-- Adjust dimensions for collision -->
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="1" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.00765" ixy="0" ixz="0" iyy="0.01755" iyz="0" izz="0.014" />
+    </inertial>
+  </link>
+
+  <joint name="head_display" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="head_link"/>
+    <child link="display_link"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- Head Link (Add visual, collision, inertial, and joints as needed) -->
+  <link name="display_link">
+    <!-- Visual Properties for the cuboidal shape (customize as needed) -->
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0.03 1.1666"/> <!-- Adjust the position -->
+      <geometry>
+        <box size="0.2 0.07 0.1"/> <!-- Adjust dimensions for the cuboid -->
+      </geometry>
+      <material name="cuboidal_material">
+        <color rgba="0 0 0 1"/> <!-- Yellow color for the cuboidal shape -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the cuboidal shape (customize as needed) -->
+    <collision>
+      <geometry>
+        <box size="0.2 0.07 0.1"/> <!-- Adjust dimensions for collision -->
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.6" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.0043725" ixy="0" ixz="0" iyy="0.0125" iyz="0" izz="0.011225" />
+    </inertial>
+  </link>
+
+  <joint name="head_lidar" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="head_link"/>
+    <child link="lidar_link"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+<!-- Lidar Link -->
+  <link name="lidar_link">
+    <!-- Visual Properties for the lidar (customize as needed) -->
+    <visual>
+    <origin rpy="0 0 0" xyz="0 0 1.256" />
+      <geometry>
+        <cylinder length="0.03" radius="0.035"/>
+      </geometry>
+      <material name="lidar_material">
+        <color rgba="0 0 0 1"/> <!-- Red color for lidar -->
+    </material>
+    </visual>
+    <!-- Collision Properties for the lidar (customize as needed) -->
+    <collision>
+      <geometry>
+        <cylinder length="0.03" radius="0.035"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.15" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.00013" ixy="0" ixz="0" iyy="0.00013" iyz="0" izz="0.000065" />
+    </inertial>
+  </link>
+
+  <!-- Wheel Link -->
+  <link name="wheel_link_1">
+    
+    <!-- Visual Properties for the wheel (customize as needed) -->
+    <visual>
+    <origin xyz="0 0 0" rpy="0 1.5 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.07"/>
+      </geometry>
+      <material name="wheel_material">
+        <color rgba="0 0 1 1"/> <!-- Black color for the wheel -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the wheel (customize as needed) -->
+    <collision>
+      <geometry>
+        <cylinder length="0.04" radius="0.07"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.15" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.004" ixy="0.001" ixz="0" iyy="0.006" iyz="0" izz="0.007" />
+    </inertial>
+  </link>
+
+  <!-- Wheel Link -->
+  <link name="wheel_link_2">
+    
+    <!-- Visual Properties for the wheel (customize as needed) -->
+    <visual>
+    <origin xyz="0 0 0" rpy="0 1.5 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.07"/>
+      </geometry>
+      <material name="wheel_material">
+        <color rgba="0 0 1 1"/> <!-- Black color for the wheel -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the wheel (customize as needed) -->
+    <collision>
+      <geometry>
+        <cylinder length="0.04" radius="0.07"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.15" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.004" ixy="0.001" ixz="0" iyy="0.006" iyz="0" izz="0.007" />
+    </inertial>
+  </link>
+
+  <!-- Wheel Link -->
+  <link name="wheel_link_3">
+    
+    <!-- Visual Properties for the wheel (customize as needed) -->
+    <visual>
+    <origin xyz="0 0 0" rpy="0 1.5 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.07"/>
+      </geometry>
+      <material name="wheel_material">
+        <color rgba="0 0 1 1"/> <!-- Black color for the wheel -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the wheel (customize as needed) -->
+    <collision>
+      <geometry>
+        <cylinder length="0.04" radius="0.07"/>
+      </geometry>
+    </collision>
+    <inertial>
+        <mass value="0.15" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.004" ixy="0.001" ixz="0" iyy="0.006" iyz="0" izz="0.007" />
+    </inertial>
+  </link>
+  <!-- Wheel Link -->
+  <link name="wheel_link_4">
+    
+    <!-- Visual Properties for the wheel (customize as needed) -->
+    <visual>
+    <origin xyz="0 0 0" rpy="0 1.5 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.07"/>
+      </geometry>
+      <material name="wheel_material">
+        <color rgba="0 0 1 1"/> <!-- Black color for the wheel -->
+      </material>
+    </visual>
+    <!-- Collision Properties for the wheel (customize as needed) -->
+    <collision>
+      <geometry>
+        <cylinder length="0.04" radius="0.07"/>
+      </geometry>
+    </collision>
+    <inertial>
+            <mass value="0.15" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.004" ixy="0.001" ixz="0" iyy="0.006" iyz="0" izz="0.007" />
+    </inertial>
+  </link>
+
+  <!-- Attach the wheels to the base link using joints -->
+  <joint name="wheel_joint_1" type="continuous">
+    <origin xyz="0.125 0.125 0.055" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_link_1"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="0.5" friction="0.2"/>
+    
+  </joint>
+
+  <joint name="wheel_joint_2" type="continuous">
+    <origin xyz="-0.125 0.125 0.055" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_link_2"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="0.5" friction="0.2"/>
+  </joint>
+
+  <joint name="wheel_joint_3" type="continuous">
+    <origin xyz="-0.125 -0.125 0.055" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_link_3"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="0.5" friction="0.2"/>
+  </joint>
+
+  <joint name="wheel_joint_4" type="continuous">
+    <origin xyz="0.125 -0.125 0.055" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_link_4"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="0.5" friction="0.2"/>
+  </joint>
+
+  <gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <robotNamespace>/</robotNamespace>
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+  </plugin>
+</gazebo>
+
+
+  <!-- Front Camera Sensor -->
+  <gazebo reference="head_link">
+  <material>Gazebo/SkyBlue</material>
+    <sensor type="camera" name="head_camera">
+      <camera name="head_camera">
+        <!-- Camera parameters -->
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>100</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>      
+      <!-- Add a plugin to specify the ROS topic name -->
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <!-- Sensor settings -->
+        <always_on>true</always_on>
+        <update_rate>30.0</update_rate>
+        <visualize>true</visualize>
+        <cameraName>isrobot/front_cam</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>  
+
+  <!--Side camera sensor-->
+
+  <gazebo reference="camera_frustum_link">
+    <material>Gazebo/Blue</material>
+    <sensor type="camera" name="side_camera">
+      <camera name="side_camera">
+        <!-- Camera parameters -->
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>100</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>      
+      <!-- Add a plugin to specify the ROS topic name -->
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <!-- Sensor settings -->
+        <always_on>true</always_on>
+        <update_rate>30.0</update_rate>
+        <visualize>true</visualize>
+        <cameraName>isrobot/side_cam</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo> 
+
+  <!--Lidar Sensor-->
+  <gazebo reference="lidar_link">
+        <material>Gazebo/Red</material>
+ 
+        <sensor name="lidar" type="ray">
+            <pose> 0 0 0 0 0 0 </pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>
+                        <min_angle>-3.14</min_angle>
+                        <max_angle>3.14</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>12</max>
+                </range>
+            </ray>
+            <plugin name="laser_controller" filename="libgazebo_ros_laser.so">
+                <topicName>isrobot/laser</topicName>
+                <ros>
+                    <argument>~/out:=scan</argument>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>laser_frame</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+    <!--IMU Sensor-->
+    <gazebo reference="frustum_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>isrobot/imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+    </sensor>
+    </gazebo>
+
+    <transmission name="wheel_1_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="wheel_joint_1">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="wheel_1_actuator">
+        <mechanicalReduction>1</mechanicalReduction>
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </actuator>
+    </transmission>
+
+    <transmission name="wheel_2_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="wheel_joint_2">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="wheel_2_actuator">
+        <mechanicalReduction>1</mechanicalReduction>
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </actuator>
+    </transmission>
+
+    <transmission name="wheel_3_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="wheel_joint_3">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="wheel_3_actuator">
+        <mechanicalReduction>1</mechanicalReduction>
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </actuator>
+    </transmission>
+
+    <transmission name="wheel_4_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="wheel_joint_4">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="wheel_4_actuator">
+        <mechanicalReduction>1</mechanicalReduction>
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </actuator>
+    </transmission>
+ 
+
+  <gazebo reference="wheel_link_1">
+  <sensor name="joint_state_1" type="joint_state">
+    <always_on>true</always_on>
+    <update_rate>100</update_rate>
+    <visualize>true</visualize>
+    <plugin name="joint_state_controller" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName>wheel_joint_1</jointName>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100</updateRate>
+      <topicName>joint_states</topicName>
+    </plugin>
+  </sensor>
+</gazebo>
+<gazebo reference="wheel_link_2">
+  <sensor name="joint_state_2" type="joint_state">
+    <always_on>true</always_on>
+    <update_rate>100</update_rate>
+    <visualize>true</visualize>
+    <plugin name="joint_state_controller" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName>wheel_joint_2</jointName>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100</updateRate>
+      <topicName>joint_states</topicName>
+    </plugin>
+  </sensor>
+</gazebo>
+<gazebo reference="wheel_link_3">
+  <sensor name="joint_state_3" type="joint_state">
+    <always_on>true</always_on>
+    <update_rate>100</update_rate>
+    <visualize>true</visualize>
+    <plugin name="joint_state_controller" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName>wheel_joint_3</jointName>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100</updateRate>
+      <topicName>joint_states</topicName>
+    </plugin>
+  </sensor>
+</gazebo>
+<gazebo reference="wheel_link_4">
+  <sensor name="joint_state_4" type="joint_state">
+    <always_on>true</always_on>
+    <update_rate>100</update_rate>
+    <visualize>true</visualize>
+    <plugin name="joint_state_controller" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName>wheel_joint_4</jointName>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100</updateRate>
+      <topicName>joint_states</topicName>
+    </plugin>
+  </sensor>
+</gazebo>
+</robot>
+
+
+  

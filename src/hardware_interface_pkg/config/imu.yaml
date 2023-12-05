@@ -1,0 +1,25 @@
+# IMU ROS Driver Configuration
+
+# ROS Node Name
+node_name: imu
+
+# IMU Configuration (change accordingly)
+imu_topic: /imu
+frame_id: imu_link
+
+# IMU Parameters (change accordingly)
+imu_type: xsens
+device_port: /dev/ttyUSB0
+baudrate: 115200
+
+# Calibration Parameters (change accordingly)
+calibration_matrix:
+  accel: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  gyro: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+
+# Debugging
+debug: false
+info: true
+warn: true
+error: true
+

@@ -1,0 +1,6 @@
+<launch>
+<node pkg="navigation_pkg" type="path_planning.py" name="path_planning_node" output="screen"/>
+<node pkg="navigation_pkg" type="obstacle_avoidance.py" name="obstacle_avoidance_node" output="screen"/>
+<node pkg="navigation_pkg" type="scan_qr.py" name="scan_qr_node" output="screen"/>
+</launch>
+

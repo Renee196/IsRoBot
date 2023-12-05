@@ -1,0 +1,37 @@
+<launch>
+  <!-- Launch Speaker Node -->
+  <node pkg="hardware_interface_pkg" type="speaker.cpp" name="speaker" output="screen">
+    <param name="config" value="$(find hardware_interface_pkg)/config/speaker_config.yaml"/>
+  </node>
+
+  <!-- Launch Microphone Node -->
+  <node pkg="hardware_interface_pkgn" type="mic.cpp" name="mic" output="screen">
+    <param name="config" value="$(find hardware_interface_pkg)/config/mic_config.yaml"/>
+  </node>
+
+  <!-- Launch Encoder Node -->
+  <node pkg="hardware_interface_pkg" type="encoder.cpp" name="encoder" output="screen">
+    <param name="config" value="$(find hardware_interface_pkg)/config/encoders_config.yaml"/>
+  </node>
+
+  <!-- Launch IMU Node -->
+  <node pkg="hardware_interface_pkg" type="imu.cpp" name="imu" output="screen">
+    <param name="config" value="$(find hardware_interface_pkg)/config/imu_config.yaml"/>
+  </node>
+
+  <!-- Launch Front Camera Node -->
+  <node pkg="hardware_interface_pkg" type="front_camera.cpp" name="front_cam" output="screen">
+    <param name="config" value="$(find hardware_interface_pkg)/config/front_camera_config.yaml"/>
+  </node>
+
+  <!-- Launch Side Camera Node -->
+  <node pkg="hardware_interface_pkg" type="side_camera.cpp" name="side_cam" output="screen">
+    <param name="config" value="$(find hardware_interface_pkg)/config/side_camera_config.yaml"/>
+  </node>
+
+  <!-- Launch LiDAR Node -->
+  <node pkg="hardware_interface_pkg" type="lidar.cpp" name="lidar" output="screen">
+    <param name="config" value="$(find hardware_interface_pkg)/config/lidar_config.yaml"/>
+  </node>
+</launch>
+

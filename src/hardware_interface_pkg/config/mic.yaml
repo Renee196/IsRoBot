@@ -1,0 +1,15 @@
+# Microphone ROS Configuration
+
+# ROS Node Name
+node_name: mic
+
+# ROS Parameters (change accordingly)
+audio_topic: /audio/microphone
+device: default # Specify the audio device identifier if not using the default
+
+# Debugging
+debug: false
+info: true
+warn: true
+error: true
+

@@ -1,0 +1,8 @@
+<launch>
+<include file="$(find perception_pkg)/launch/perception.launch"/>
+<include file="$(find hardware_interface_pkg)/launch/hardware_interface.launch"/>
+<include file="$(find navigation_pkg)/launch/navigation.launch"/>
+<include file="$(find voice_assistant_pkg)/launch/voice_assistant.launch"/>
+ <include file="$(find control_pkg)/launch/control.launch"/>
+</launch>
+

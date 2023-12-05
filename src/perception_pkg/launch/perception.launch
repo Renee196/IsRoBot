@@ -1,0 +1,6 @@
+<launch>
+<node pkg="perception_pkg" type="object_detection.py" name="object_detection_node" output="screen"/>
+<node pkg="perception_pkg" type="cliff_detection.py" name="cliff_detection_node" output="screen"/>
+<node pkg="perception_pkg" type="depth_estimation.py" name="depth_estimation_node" output="screen"/>
+</launch>
+

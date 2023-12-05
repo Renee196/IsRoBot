@@ -1,0 +1,26 @@
+# Quadrature Encoders ROS Configuration
+
+# ROS Node Name
+node_name: encoders
+
+# ROS Parameters (change accordingly)
+encoders_topic: /joint_states
+encoder_resolution: 1024
+
+# Encoder Configuration (change accordingly)
+encoder_pins:
+  - channel_A: 2
+    channel_B: 3
+  - channel_A: 4
+    channel_B: 5
+  - channel_A: 6
+    channel_B: 7
+  - channel_A: 8
+    channel_B: 9
+
+# Debugging
+debug: false
+info: true
+warn: true
+error: true
+
