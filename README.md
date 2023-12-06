@@ -2,13 +2,39 @@
 Github repository for the catkin workspace of IsRoBot
 Welcome to the IsRoBot project workspace! This workspace contains the ROS packages and configurations for the IsRoBot exhibition robot.
 
+For the IsRoBot project, we've endeavoured to make it semi-autonomous, That means utilising Simulatneous Localisation and Mapping (SLAM), Custom Path planning algorithm, Sensor Fusion, Object Detection(For detecting QR code landmarks), and a Voice Assistant for question and answering. 
+
+For your convenience, a small flowchart has been drawn below:
+
+Camera and Lidar -> Sensor Fusion -> Mapping -> Custom Path Planning -> Motor control
+Camera and Lidar -> Sensor Fusion -> Obstacle Avoidance (Or can be done only using Lidar data) -> Custom Path Planning -> Motor control
+Imu and Encoders -> Sesnor Fusion -> Localisation -> Custom Path Planning -> Motor control
+camera -> Object Detection (for determining QR Landmarks) -> Depth Estimation (For determining distance to landmarks) -> Custom Path Planning -> Motor Control
+
+OS used: Linux (Ubuntu 20.04 (Focal) or higher)
+Ros version used: ROS Noetic Ninjemys
+
+Hardware: Please see the image attached to get an idea about which sensors are connected to which microprocessor/microcontroller
+Microporcessor to be used: NVIDIA Jetson Nano B01
+Microcontroller to be used: Arduino MEGA
+NOTE: We planned to use an Arduino as a slave so as to decrease the processing load on Jetson Nano. It is not recommended, but you may choose to not use an Arduino
+(You will have to use the rosserial library to connect Arduino to Jetson nano as a slave)
+If you choose to use an Arduino, you will host only the following devices:
+5 ultrasonic sensors (for cliff detection)
+2 motor controllers
+4 encoders
+
+Rest of the sensors/devices shall be connected to NVIDIA Jetson Nano (You may choose to add a temperature sensor for doing predictive maintenance for the arduino and jetson nano so as to avoid overheating problems)
+Only Imu shall be connected to the digital pins of the microprocessor, rest of the sensors will be connected via USB or other ports.
+To determine which device is connected to which port, kindly refer to the Appendix section of the Project Report for IsRoBot.
+
 Getting Started
 Create your catkin workspace:
 After installing ROS noetic to your system, create a folder for housing the catkin workspace
 mkdir --parents <name_of_your_workspace>
 
 Clone the Repository:
-git clone https://github.com/Renee196/IsRoBot.git -b my_branch
+git clone https://github.com/Renee196/IsRoBot.git -b master
 
 Navigate to the Workspace:
 cd <name_of_your_workspace>
